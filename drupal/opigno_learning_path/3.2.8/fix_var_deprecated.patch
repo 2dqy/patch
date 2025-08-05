@@ -1,0 +1,22 @@
+diff --git a/src/Controller/LearningPathAchievementController.php b/src/Controller/LearningPathAchievementController.php
+index 7132373..6b97c99 100644
+--- a/src/Controller/LearningPathAchievementController.php
++++ b/src/Controller/LearningPathAchievementController.php
+@@ -801,7 +801,7 @@ class LearningPathAchievementController extends ControllerBase {
+     $training_id = $training->id();
+     $course_id = $course->id();
+     $module_id = $opigno_module->id();
+-    $selector = "#module_panel_${training_id}_${course_id}_${module_id}";
++    $selector = "#module_panel_{$training_id}_{$course_id}_{$module_id}";
+     $content = $this->buildModulePanel($training, $opigno_module, $course);
+     $content['#attributes']['data-ajax-loaded'] = TRUE;
+     $response = new AjaxResponse();
+@@ -823,7 +823,7 @@ class LearningPathAchievementController extends ControllerBase {
+   public function trainingModulePanelAjax(GroupInterface $group, OpignoModule $opigno_module): AjaxResponse {
+     $training_id = $group->id();
+     $module_id = $opigno_module->id();
+-    $selector = "#module_panel_${training_id}_${module_id}";
++    $selector = "#module_panel_{$training_id}_{$module_id}";
+     $content = $this->buildModulePanel($group, $opigno_module);
+     $content['#attributes']['data-ajax-loaded'] = TRUE;
+     $response = new AjaxResponse();

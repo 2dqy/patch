@@ -1,0 +1,56 @@
+diff --git a/config/install/views.view.opigno_training_catalog.yml b/config/install/views.view.opigno_training_catalog.yml
+index 74bd939..b753ca9 100644
+--- a/config/install/views.view.opigno_training_catalog.yml
++++ b/config/install/views.view.opigno_training_catalog.yml
+@@ -727,6 +727,7 @@ display:
+           exposed: true
+           expose:
+             label: 'Created on'
++            field_identifier: created
+           granularity: second
+           entity_type: group
+           entity_field: created
+@@ -742,6 +743,7 @@ display:
+           exposed: true
+           expose:
+             label: Weight
++            field_identifier: weight
+           entity_type: taxonomy_term
+           entity_field: weight
+           plugin_id: standard
+@@ -756,6 +758,7 @@ display:
+           exposed: true
+           expose:
+             label: Title
++            field_identifier: label
+           entity_type: group
+           entity_field: label
+           plugin_id: standard
+diff --git a/config/optional/views.view.opigno_training_catalog.yml b/config/optional/views.view.opigno_training_catalog.yml
+index 74bd939..b753ca9 100644
+--- a/config/optional/views.view.opigno_training_catalog.yml
++++ b/config/optional/views.view.opigno_training_catalog.yml
+@@ -727,6 +727,7 @@ display:
+           exposed: true
+           expose:
+             label: 'Created on'
++            field_identifier: created
+           granularity: second
+           entity_type: group
+           entity_field: created
+@@ -742,6 +743,7 @@ display:
+           exposed: true
+           expose:
+             label: Weight
++            field_identifier: weight
+           entity_type: taxonomy_term
+           entity_field: weight
+           plugin_id: standard
+@@ -756,6 +758,7 @@ display:
+           exposed: true
+           expose:
+             label: Title
++            field_identifier: label
+           entity_type: group
+           entity_field: label
+           plugin_id: standard

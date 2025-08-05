@@ -1,0 +1,22 @@
+diff --git a/templates/views/views-view--opigno-social-posts--block-recent.html.twig b/templates/views/views-view--opigno-social-posts--block-recent.html.twig
+index fa48bf6..1843386 100644
+--- a/templates/views/views-view--opigno-social-posts--block-recent.html.twig
++++ b/templates/views/views-view--opigno-social-posts--block-recent.html.twig
+@@ -56,14 +56,14 @@
+     {{ rows }}
+     <div class="view-footer">
+       {{ footer }}
+-      <a href="{{ path('opigno_social.feed_page') }}">{{ 'Open social feed' }}</a>
++      <a href="{{ path('opigno_social.feed_page') }}">{{ 'Open social feed'|t }}</a>
+     </div>
+ 
+   {% elseif empty %}
+     <div class="view-empty">
+       {{ empty }}
+-      <a class="btn btn-rounded" href="{{ path('opigno_social.feed_page') }}">{{ 'Write your first post' }}</a>
+-      <a class="btn btn-rounded" href="{{ path('opigno_social.manage_connections') }}">{{ 'Find connections' }}</a>
++      <a class="btn btn-rounded" href="{{ path('opigno_social.feed_page') }}">{{ 'Write your first post'|t }}</a>
++      <a class="btn btn-rounded" href="{{ path('opigno_social.manage_connections') }}">{{ 'Find connections'|t }}</a>
+     </div>
+   {% endif %}
+ </div>

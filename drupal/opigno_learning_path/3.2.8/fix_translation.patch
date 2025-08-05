@@ -1,0 +1,22 @@
+diff --git a/config/install/views.view.latest_active_trainings.yml b/config/install/views.view.latest_active_trainings.yml
+index 7f41bbe..2ce15f1 100644
+--- a/config/install/views.view.latest_active_trainings.yml
++++ b/config/install/views.view.latest_active_trainings.yml
+@@ -173,7 +173,7 @@ display:
+           admin_label: ''
+           plugin_id: text_custom
+           empty: true
+-          content: "You haven't started training yet.\r\n<a class=\"btn btn-rounded\" href=\"{{ path('view.opigno_training_catalog.training_catalogue') }}\">{{ 'Start your first training'|t }}</a>"
++          content: "{{ \"You haven't started training yet.\"|t }}\r\n<a class=\"btn btn-rounded\" href=\"{{ path('view.opigno_training_catalog.training_catalogue') }}\">{{ 'Start your first training'|t }}</a>"
+           tokenize: true
+       sorts:
+         timestamp:
+@@ -332,7 +332,7 @@ display:
+           admin_label: ''
+           plugin_id: text_custom
+           empty: false
+-          content: '<a href="{{ path(''view.opigno_training_catalog.training_catalogue'', {}, {''query'': {''opigno_group_membership'': 1}}) }}">See all your training</a>'
++          content: "<a href=\"{{ path('view.opigno_training_catalog.training_catalogue', {}, {'query': {'opigno_group_membership': 1}}) }}\">{{ 'See all your training'|t }}</a>"
+           tokenize: true
+       display_extenders: {  }
+     cache_metadata:

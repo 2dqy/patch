@@ -1,0 +1,53 @@
+diff --git a/src/Controller/UserController.php b/src/Controller/UserController.php
+index ae0d306..e114cc9 100644
+--- a/src/Controller/UserController.php
++++ b/src/Controller/UserController.php
+@@ -555,10 +555,10 @@ class UserController extends ControllerBase {
+ 
+     if (isset($course)) {
+       $course_id = $course->id();
+-      $id = "module_panel_${user_id}_${training_id}_${course_id}_${module_id}";
++      $id = "module_panel_{$user_id}_{$training_id}_{$course_id}_{$module_id}";
+     }
+     else {
+-      $id = "module_panel_${user_id}_${training_id}_${module_id}";
++      $id = "module_panel_{$user_id}_{$training_id}_{$module_id}";
+     }
+ 
+     if (isset($attempt)) {
+@@ -764,7 +764,7 @@ class UserController extends ControllerBase {
+                   '#type' => 'html_tag',
+                   '#tag' => 'span',
+                   '#attributes' => [
+-                    'id' => "module_panel_${user_id}_${training_gid}_${course_gid}_${module_id}",
++                    'id' => "module_panel_{$user_id}_{$training_gid}_{$course_gid}_{$module_id}",
+                   ],
+                 ],
+               ],
+@@ -1055,7 +1055,7 @@ class UserController extends ControllerBase {
+                   '#type' => 'html_tag',
+                   '#tag' => 'span',
+                   '#attributes' => [
+-                    'id' => "module_panel_${uid}_${gid}_${module_id}",
++                    'id' => "module_panel_{$uid}_{$gid}_{$module_id}",
+                   ],
+                 ],
+               ],
+@@ -1145,7 +1145,7 @@ class UserController extends ControllerBase {
+     $course_id = $course->id();
+     $module_id = $module->id();
+     $user_id = $user->id();
+-    $selector = "#module_panel_${user_id}_${training_id}_${course_id}_${module_id}";
++    $selector = "#module_panel_{$user_id}_{$training_id}_{$course_id}_{$module_id}";
+     $content = $this->buildModuleDetails($user, $training, $course, $module);
+     $content['#attributes']['data-ajax-loaded'] = TRUE;
+     $response = new AjaxResponse();
+@@ -1177,7 +1177,7 @@ class UserController extends ControllerBase {
+     $training_id = $training->id();
+     $module_id = $module->id();
+     $user_id = $user->id();
+-    $selector = "#module_panel_${user_id}_${training_id}_${module_id}";
++    $selector = "#module_panel_{$user_id}_{$training_id}_{$module_id}";
+     $content = $this->buildModuleDetails($user, $training, NULL, $module);
+     $content['#attributes']['data-ajax-loaded'] = TRUE;
+     $response = new AjaxResponse();

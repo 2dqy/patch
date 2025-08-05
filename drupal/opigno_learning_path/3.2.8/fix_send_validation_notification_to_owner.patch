@@ -1,0 +1,13 @@
+diff --git a/opigno_learning_path.module b/opigno_learning_path.module
+index 028a3d1..dede2fd 100644
+--- a/opigno_learning_path.module
++++ b/opigno_learning_path.module
+@@ -2129,7 +2129,7 @@ function opigno_learning_path_entity_presave(EntityInterface $entity) {
+ 
+         $receivers = opigno_learning_path_get_student_managers($group);
+         foreach ($receivers as $uid => $receiver) {
+-          if ($user->id() === $uid) {
++          if ($user->id() == $uid) {
+             continue;
+           }
+ 

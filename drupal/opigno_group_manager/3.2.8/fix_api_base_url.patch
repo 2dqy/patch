@@ -1,0 +1,13 @@
+diff --git a/templates/opigno-group-manager.html.twig b/templates/opigno-group-manager.html.twig
+index 8ba591d..0ce0293 100644
+--- a/templates/opigno-group-manager.html.twig
++++ b/templates/opigno-group-manager.html.twig
+@@ -6,7 +6,7 @@
+   window.appConfig = {
+     formSubmitBtn: false,
+     groupId: {{ group_id }},
+-    apiBaseUrl: '{{ base_path ~ language_prefix }}',
++    apiBaseUrl: '{{ base_path }}',
+     viewType: 'manager',
+     userHasInfoCard: '{{ user_has_info_card }}',
+     hideInfocardUrl: '/opigno-group-manager/hide-info-card',

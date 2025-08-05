@@ -1,0 +1,46 @@
+diff --git a/src/Controller/ExternalPackageController.php b/src/Controller/ExternalPackageController.php
+index b823787..0c3f7af 100644
+--- a/src/Controller/ExternalPackageController.php
++++ b/src/Controller/ExternalPackageController.php
+@@ -475,7 +475,7 @@ class ExternalPackageController extends ControllerBase {
+         $files = $file_system->scanDirectory($ppt_dir_real_path, '/.*\.(jpg)$/');
+         // Format images with background.
+         foreach ($files as $f) {
+-          exec($imagemagick_bin_path . ' white.png ' . $f->filename . ' -gravity center -composite -matte -quality 100 ' . $f->filename);
++          exec($imagemagick_bin_path . ' white.png ' . $f->filename . ' -colorspace sRGB -gravity center -composite -matte -quality 100 ' . $f->filename);
+         }
+ 
+         \Drupal::logger('ppt_converter')->notice('Convert to jpg finished.');
+diff --git a/src/Controller/OpignoModuleManagerController.php b/src/Controller/OpignoModuleManagerController.php
+index 8572d7f..c5b99b9 100644
+--- a/src/Controller/OpignoModuleManagerController.php
++++ b/src/Controller/OpignoModuleManagerController.php
+@@ -567,12 +567,12 @@ class OpignoModuleManagerController extends ControllerBase {
+       }
+ 
+       $libreoffice = FALSE;
+-      if (exec(ExternalPackageController::getLibreOfficeBinPath() . ' --version')) {
++      if (shell_exec(ExternalPackageController::getLibreOfficeBinPath() . ' --version')) {
+         $libreoffice = TRUE;
+       }
+ 
+       $imagemagick = FALSE;
+-      if (exec(ExternalPackageController::getImagemagickBinPath() . ' --version')) {
++      if (shell_exec(ExternalPackageController::getImagemagickBinPath() . ' --version')) {
+         $imagemagick = TRUE;
+       }
+ 
+diff --git a/src/Form/AddExternalPackageForm.php b/src/Form/AddExternalPackageForm.php
+index 10079f0..dd0ee97 100644
+--- a/src/Form/AddExternalPackageForm.php
++++ b/src/Form/AddExternalPackageForm.php
+@@ -186,7 +186,8 @@ class AddExternalPackageForm extends FormBase {
+       // Rename uploaded file - remove special chars.
+       $file_new = $file[0];
+       $filename = $file_new->getFilename();
+-      $filename_new = preg_replace('/[^a-zA-Z0-9-_\.]/', '-', $filename);
++      $filename_new = 'ppt'.$file_new->id() . '.' . pathinfo($filename, PATHINFO_EXTENSION);
++      $filename_new = preg_replace('/[^a-zA-Z0-9-_\.]/', '-', $filename_new);
+       $file_new->setFilename($filename_new);
+       $file_new->setFileUri($temporary_file_path . '/' . $filename_new);
+       $file_new->save();
