@@ -1,13 +1,43 @@
 diff --git a/src/Controller/ExternalPackageController.php b/src/Controller/ExternalPackageController.php
-index b823787..0c3f7af 100644
+index b823787..1523d67 100644
 --- a/src/Controller/ExternalPackageController.php
 +++ b/src/Controller/ExternalPackageController.php
-@@ -475,7 +475,7 @@ class ExternalPackageController extends ControllerBase {
+@@ -461,21 +461,33 @@ class ExternalPackageController extends ControllerBase {
+       \Drupal::logger('ppt_converter')->notice('Convert to pdf finished. Time of converting: ' . $converting_time);
+ 
+       if ($result) {
++        // use gs to optimize
++        $mySetting = \Drupal\Core\Site\Settings::get('my_custom_setting_convert_ppt_slides_to_images', []);
++        $gsBin = $mySetting['gs_bin'] ?? '/usr/bin/gs';
++        $hasGs = (bool)shell_exec($gsBin . ' --version');
+         \Drupal::logger('ppt_converter')->notice('Starting convert to jpg.');
+ 
+         // Convert to images.
+         $imagemagick_bin_path = self::getImagemagickBinPath();
+-        // Extract images from pdf.
+-        exec($imagemagick_bin_path . " -density 300 " . $path_info['filename'] . ".pdf -resize 1920x960 -quality 100 -gravity Center " . $path_info['filename'] . ".jpg");
+-        // Background helper image.
+-        exec($imagemagick_bin_path . ' -size 1920x960 xc:white white.png');
++        if ($hasGs) {
++          exec($gsBin.' -dNOPAUSE -dBATCH -sDEVICE=jpeg -r300 -dJPEGQ=100 -sOutputFile=' . $path_info['filename'] . '-%d.jpg ' . $path_info['filename'] . '.pdf');
++        } else {
++          // Extract images from pdf.
++          exec($imagemagick_bin_path . " -density 300 " . $path_info['filename'] . ".pdf -gravity Center -resize 1920x960 -quality 100 " . $path_info['filename'] . ".jpg");
++          // Background helper image.
++          exec($imagemagick_bin_path . ' -size 1920x960 xc:white white.png');
++        }
+ 
+         /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+         $file_system = \Drupal::service('file_system');
          $files = $file_system->scanDirectory($ppt_dir_real_path, '/.*\.(jpg)$/');
          // Format images with background.
          foreach ($files as $f) {
 -          exec($imagemagick_bin_path . ' white.png ' . $f->filename . ' -gravity center -composite -matte -quality 100 ' . $f->filename);
-+          exec($imagemagick_bin_path . ' white.png ' . $f->filename . ' -colorspace sRGB -gravity center -composite -matte -quality 100 ' . $f->filename);
++          if ($hasGs) {
++            exec($imagemagick_bin_path . ' ' . $f->filename . ' -gravity Center -resize x960 -extent 1920x960 -quality 100 ' . $f->filename);
++          } else {
++            exec($imagemagick_bin_path . ' white.png ' . $f->filename . ' -colorspace sRGB -gravity center -composite -matte -quality 100 ' . $f->filename);
++          }
          }
  
          \Drupal::logger('ppt_converter')->notice('Convert to jpg finished.');
