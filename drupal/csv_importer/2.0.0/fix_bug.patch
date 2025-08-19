@@ -1,0 +1,28 @@
+diff --git a/src/Parser.php b/src/Parser.php
+index e303bd3..e09ff6b 100644
+--- a/src/Parser.php
++++ b/src/Parser.php
+@@ -36,6 +36,10 @@ class Parser implements ParserInterface {
+ 
+     if (($csv = fopen($entity->uri->getString(), 'r')) !== FALSE) {
+       while (($row = fgetcsv($csv, 0, $delimiter)) !== FALSE) {
++        // first line remove bom
++        if (!$return) {
++          $row = str_replace("\xEF\xBB\xBF", '', $row);
++        }
+         $return[] = $row;
+       }
+ 
+diff --git a/src/Plugin/ImporterBase.php b/src/Plugin/ImporterBase.php
+index d740c50..e22f915 100644
+--- a/src/Plugin/ImporterBase.php
++++ b/src/Plugin/ImporterBase.php
+@@ -227,7 +227,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
+ 
+       $languages = $this->languageManager->getLanguages();
+       $langcode_default = $this->languageManager->getDefaultLanguage()->getId();
+-      $langcode = $this->languageManager->isMultilingual() && isset($languages[$content['langcode']]) ? $content['langcode'] : $langcode_default;
++      $langcode = ($this->languageManager->isMultilingual() && isset($content['langcode']) && isset($languages[$content['langcode']])) ? $content['langcode'] : $langcode_default;
+ 
+       if ($entity) {
+         if ($entity->hasTranslation($langcode)) {
