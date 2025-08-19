@@ -1,0 +1,12 @@
+diff --git a/opigno_catalog.module b/opigno_catalog.module
+index 1b29e20..a5170e6 100644
+--- a/opigno_catalog.module
++++ b/opigno_catalog.module
+@@ -111,6 +111,7 @@ function opigno_catalog_preprocess_views_view__opigno_training_catalog(&$variabl
+ 
+   // Add library.
+   $variables['view']->element['#attached']['library'][] = 'opigno_catalog/view_style';
++  \Drupal::moduleHandler()->invokeAll('my_custom_hook_after_opigno_catalog_preprocess_views_view__opigno_training_catalog', [&$variables]);
+ }
+ 
+ /**
