@@ -1,0 +1,12 @@
+diff --git a/opigno_learning_path.module b/opigno_learning_path.module
+index 028a3d1..e5a058f 100644
+--- a/opigno_learning_path.module
++++ b/opigno_learning_path.module
+@@ -1418,6 +1418,7 @@ function opigno_learning_path_form_group_content_form_alter(&$form, FormStateInt
+   $form['#attached']['drupalSettings']['opigno_learning_path']['gid'] = $group->id();
+   $form['#validate'] = [];
+   $form['#submit'] = ['opigno_learning_path_group_membership_add_form_submit'];
++  \Drupal::moduleHandler()->invokeAll('my_custom_hook_after_opigno_learning_path_form_group_content_form_alter', [&$form, $form_state, $form_id]);
+ }
+ 
+ /**
