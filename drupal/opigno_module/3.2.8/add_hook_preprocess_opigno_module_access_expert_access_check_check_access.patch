@@ -1,0 +1,12 @@
+diff --git a/src/Access/ExpertAccessCheck.php b/src/Access/ExpertAccessCheck.php
+index 9e7a4a6..a77b270 100644
+--- a/src/Access/ExpertAccessCheck.php
++++ b/src/Access/ExpertAccessCheck.php
+@@ -79,6 +79,7 @@ class ExpertAccessCheck implements AccessInterface {
+       'content_manager',
+       'user_manager',
+     ];
++    \Drupal::moduleHandler()->invokeAll('my_custom_hook_preprocess_opigno_module_access_expert_access_check_check_access', [&$allowed_roles]);
+ 
+     // Uid 1.
+     $uid = $account->id();
