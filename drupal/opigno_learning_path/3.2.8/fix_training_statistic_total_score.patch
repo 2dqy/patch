@@ -1,0 +1,35 @@
+diff --git a/src/Controller/LearningPathAchievementController.php b/src/Controller/LearningPathAchievementController.php
+index 7132373..52cceaf 100644
+--- a/src/Controller/LearningPathAchievementController.php
++++ b/src/Controller/LearningPathAchievementController.php
+@@ -249,7 +249,9 @@ class LearningPathAchievementController extends ControllerBase {
+       $score = 0;
+     }
+     $activities_done = 0;
+-    $activities = array_map(function ($activity) use ($user, $module, $attempt, &$activities_done) {
++    $totalScore = 0;
++    $totalMaxScore = 0;
++    $activities = array_map(function ($activity) use ($user, $module, $attempt, &$activities_done, &$totalScore, &$totalMaxScore) {
+       /** @var \Drupal\opigno_module\Entity\OpignoActivity $activity */
+       /** @var \Drupal\opigno_module\Entity\OpignoAnswer $answer */
+       $answer = isset($attempt)
+@@ -261,6 +263,8 @@ class LearningPathAchievementController extends ControllerBase {
+       if ($max_score == 0 && $activity->get('auto_skills')->getValue()[0]['value'] == 1) {
+         $max_score = 10;
+       }
++      $totalScore += $score;
++      $totalMaxScore += $max_score;
+ 
+       if ($answer && $activity->hasField('opigno_evaluation_method') && $activity->get('opigno_evaluation_method')->value && !$answer->isEvaluated()) {
+         $state_class = 'pending';
+@@ -327,8 +331,8 @@ class LearningPathAchievementController extends ControllerBase {
+         '#type' => 'inline_template',
+         '#template' => '<div class="activity-info__item"><div class="label">{{"Score"|t}}</div><div class="value"><span>{{score}}/{{max_score}}</span></div></div>',
+         '#context' => [
+-          'score' => (int) $score,
+-          'max_score' => (int) $max_score,
++          'score' => (int) $totalScore,
++          'max_score' => (int) $totalMaxScore,
+         ],
+       ],
+     ];
