@@ -1,0 +1,12 @@
+diff --git a/opigno_module.module b/opigno_module.module
+index 3219ece..920323e 100644
+--- a/opigno_module.module
++++ b/opigno_module.module
+@@ -1464,6 +1464,7 @@ function opigno_module_block_access(Block $block, $operation, AccountInterface $
+     $access_service = \Drupal::service('opigno_module.expert_access_checker');
+     $expert_access = !$access_service instanceof ExpertAccessCheck || $access_service->checkAccess($account, TRUE);
+     $access = $expert_access && $menu_access ? AccessResult::allowed() : AccessResult::forbidden();
++    $access = $account->hasPermission('my custom lms view opigno admin') ? AccessResult::allowed() : $access;
+ 
+     return $access->addCacheableDependency($account);
+   }
