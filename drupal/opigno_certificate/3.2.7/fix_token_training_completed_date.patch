@@ -1,0 +1,28 @@
+diff --git a/opigno_certificate.module b/opigno_certificate.module
+index db32e9d..2dd6ff1 100644
+--- a/opigno_certificate.module
++++ b/opigno_certificate.module
+@@ -299,7 +299,7 @@ function opigno_certificate_form_alter(&$form, FormStateInterface $form_state, $
+       '#markup' => '<p>The following tokens are available, and make possible to have some information about user data, training\'s name, completion date automatically inserted into the certificate when it is issued.</p>
+ <ul>
+ <li>Training title - [opigno_certificate:referencing_entity]</li>
+-<li>Training completed on date - [opigno_certificate:created]</li>
++<li>Training completed on date - [opigno_certificate:formatted_created]</li>
+ <li>Training certificate expiration date - [group:expiration_date]</li>
+ <li>User who completed training - [current-user:display-name]</li>
+ <li>Certificate title - [opigno_certificate:label]</li>
+diff --git a/opigno_certificate.tokens.inc b/opigno_certificate.tokens.inc
+index 27401f3..2700e32 100644
+--- a/opigno_certificate.tokens.inc
++++ b/opigno_certificate.tokens.inc
+@@ -60,8 +60,8 @@ function opigno_certificate_tokens($type, $tokens, array $data, array $options,
+           }
+           break;
+ 
+-        case 'created':
+-          $target = $opigno_certificate->get('referencing_entity')->getValue()[0];
++        case 'formatted_created':
++          $target = $opigno_certificate->get('referencing_entity')->getValue()[0] ?? 0;
+ 
+           if (!empty($target)) {
+             $gid = $target['target_id'];
