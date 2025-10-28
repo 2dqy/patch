@@ -1,0 +1,24 @@
+diff --git a/src/Controller/OpignoGroupManagerController.php b/src/Controller/OpignoGroupManagerController.php
+index 199e79e..4d070f6 100644
+--- a/src/Controller/OpignoGroupManagerController.php
++++ b/src/Controller/OpignoGroupManagerController.php
+@@ -955,6 +955,7 @@ public function getAvailableItems($mainItem = NULL) {
+         $available_contents[] = $content_type_content->toManagerArray();
+       }
+     }
++    \Drupal::moduleHandler()->invokeAll('my_custom_hook_preprocess_opigno_group_manager_get_available_items', [&$available_contents]);
+ 
+     // Return the available contents in JSON.
+     return new JsonResponse($available_contents, Response::HTTP_OK);
+diff --git a/src/OpignoGroupContent.php b/src/OpignoGroupContent.php
+index 9d49bf2..f374cd2 100644
+--- a/src/OpignoGroupContent.php
++++ b/src/OpignoGroupContent.php
+@@ -125,6 +125,7 @@ public function toManagerArray(OpignoGroupManagedContent $content = NULL) {
+         'showError' => (int) $min_modules_score === 0 && $success_score_min > $min_modules_score,
+       ];
+     }
++    $this_array['myCustomOwnerId'] = method_exists($entity, 'getOwnerId') ? (int)($entity->getOwnerId()) : null;
+ 
+     return $this_array;
+   }
