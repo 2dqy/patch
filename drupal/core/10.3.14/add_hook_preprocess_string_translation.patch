@@ -1,0 +1,12 @@
+diff --git a/lib/Drupal/Core/StringTranslation/TranslatableMarkup.php b/lib/Drupal/Core/StringTranslation/TranslatableMarkup.php
+index 076c6f5559..cf55255cd0 100644
+--- a/lib/Drupal/Core/StringTranslation/TranslatableMarkup.php
++++ b/lib/Drupal/Core/StringTranslation/TranslatableMarkup.php
+@@ -131,6 +131,7 @@ class TranslatableMarkup extends FormattableMarkup {
+       $message = $string instanceof TranslatableMarkup ? '$string ("' . $string->getUntranslatedString() . '") must be a string.' : '$string ("' . (string) $string . '") must be a string.';
+       throw new \InvalidArgumentException($message);
+     }
++    \Drupal::moduleHandler()->invokeAll('my_custom_hook_preprocess_string_translation', [&$string, $arguments, $options, $string_translation]);
+     parent::__construct($string, $arguments);
+     $this->options = $options;
+     $this->stringTranslation = $string_translation;

@@ -1,0 +1,40 @@
+diff --git a/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php b/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php
+index ac156eeee2..6d6102996c 100644
+--- a/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php
++++ b/modules/language/src/Plugin/LanguageNegotiation/LanguageNegotiationUrl.php
+@@ -133,7 +133,7 @@ class LanguageNegotiationUrl extends LanguageNegotiationMethodBase implements In
+     $languages = array_flip(array_keys($this->languageManager->getLanguages()));
+     // Language can be passed as an option, or we go for current URL language.
+     if (!isset($options['language']) || ($options['language'] instanceof LanguageInterface && $options['language']->getId() == LanguageInterface::LANGCODE_NOT_SPECIFIED)) {
+-      $language_url = $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_URL);
++      $language_url = $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_INTERFACE);
+       $options['language'] = $language_url;
+     }
+     // We allow only added languages here.
+diff --git a/modules/user/src/ProfileForm.php b/modules/user/src/ProfileForm.php
+index f98437bb0f..62f0bac460 100644
+--- a/modules/user/src/ProfileForm.php
++++ b/modules/user/src/ProfileForm.php
+@@ -45,6 +45,10 @@ class ProfileForm extends AccountForm {
+     $account = $this->entity;
+     $account->save();
+     $form_state->setValue('uid', $account->id());
++    if ($this->currentUser()->id() == $account->id()) {
++      \Drupal::currentUser()->setAccount(\Drupal::entityTypeManager()->getStorage('user')->load($account->id()));
++      \Drupal::languageManager()->reset();
++    }
+ 
+     $this->messenger()->addStatus($this->t('The changes have been saved.'));
+   }
+diff --git a/modules/user/user.module b/modules/user/user.module
+index 9fafc8f63e..eed8c6942b 100644
+--- a/modules/user/user.module
++++ b/modules/user/user.module
+@@ -456,6 +456,7 @@ function template_preprocess_username(&$variables) {
+  */
+ function user_login_finalize(UserInterface $account) {
+   \Drupal::currentUser()->setAccount($account);
++  \Drupal::languageManager()->reset();
+   \Drupal::logger('user')->info('Session opened for %name.', ['%name' => $account->getAccountName()]);
+   // Update the user table timestamp noting user has logged in.
+   // This is also used to invalidate one-time login links.
