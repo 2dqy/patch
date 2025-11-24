@@ -1,0 +1,26 @@
+diff --git a/src/Entity/OpignoActivity.php b/src/Entity/OpignoActivity.php
+index 2634a89..a04bd8f 100644
+--- a/src/Entity/OpignoActivity.php
++++ b/src/Entity/OpignoActivity.php
+@@ -314,7 +314,7 @@ class OpignoActivity extends RevisionableContentEntityBase implements OpignoActi
+       ->setRevisionable(TRUE)
+       ->setTranslatable(TRUE)
+       ->setSettings([
+-        'max_length' => 60,
++        'max_length' => 255,
+         'text_processing' => 0,
+       ])
+       ->setDefaultValue('')
+diff --git a/src/Entity/OpignoModule.php b/src/Entity/OpignoModule.php
+index df69407..2073dcb 100644
+--- a/src/Entity/OpignoModule.php
++++ b/src/Entity/OpignoModule.php
+@@ -1086,7 +1086,7 @@ class OpignoModule extends RevisionableContentEntityBase implements OpignoModule
+       ->setTranslatable(TRUE)
+       ->setRequired(TRUE)
+       ->setSettings([
+-        'max_length' => 50,
++        'max_length' => 255,
+         'text_processing' => 0,
+       ])
+       ->setDefaultValue(NULL)
