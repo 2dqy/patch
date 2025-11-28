@@ -25,3 +25,14 @@ index 31af211..4dff08c 100644
      // Remove once so that the exposed form and pager are processed on
      // behavior attach.
      once.remove('ajax-pager', view.$view);
+diff --git a/views_infinite_scroll.libraries.yml b/views_infinite_scroll.libraries.yml
+index 0dcb38a..5d99a91 100644
+--- a/views_infinite_scroll.libraries.yml
++++ b/views_infinite_scroll.libraries.yml
+@@ -1,5 +1,5 @@
+ views-infinite-scroll:
+-  version: VERSION
++  version: 20251128
+   js:
+     js/infinite-scroll.js : {}
+   dependencies:
