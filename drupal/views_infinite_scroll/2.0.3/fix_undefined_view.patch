@@ -1,0 +1,27 @@
+diff --git a/js/infinite-scroll.js b/js/infinite-scroll.js
+index 31af211..4dff08c 100644
+--- a/js/infinite-scroll.js
++++ b/js/infinite-scroll.js
+@@ -39,9 +39,21 @@
+     }
+ 
+     var currentViewId = matches[1].replace('js-view-dom-id-', 'views_dom_id:');
+-
++    if (!Drupal.views?.instances?.[currentViewId]) {
++      var settings = drupalSettings?.views?.ajaxViews?.[currentViewId];
++      if (!settings) {
++        console.log('%cNo ajaxViews settings for:', 'color: red', currentViewId);
++        return;
++      }
++      Drupal.views.instances[currentViewId] = new Drupal.views.ajaxView(settings);
++      console.log('%cRebuilt Drupal.views.instances for:', 'color: red', currentViewId);
++    }
+     // Get the existing ajaxViews object.
+     var view = Drupal.views.instances[currentViewId];
++    if (!view?.$view) {
++      console.log('%cNo Drupal.views.instances for:', 'color: red', currentViewId);
++      return;
++    }
+     // Remove once so that the exposed form and pager are processed on
+     // behavior attach.
+     once.remove('ajax-pager', view.$view);
