@@ -1,0 +1,18 @@
+diff --git a/src/Form/LearningPathMembersForm.php b/src/Form/LearningPathMembersForm.php
+index 1d3f49d..b9703cf 100644
+--- a/src/Form/LearningPathMembersForm.php
++++ b/src/Form/LearningPathMembersForm.php
+@@ -186,10 +186,10 @@ class LearningPathMembersForm extends FormBase {
+       return $form;
+     }
+ 
+-    if ($group_bundle == 'learning_path') {
+-      $form['#prefix'] = '<div id="group_members_list">';
+-      $form['#suffix'] = '</div>';
++    $form['#prefix'] = '<div id="group_members_list">';
++    $form['#suffix'] = '</div>';
+ 
++    if ($group_bundle == 'learning_path') {
+       $content_types = [
+         'group_content_type_27efa0097d858',
+         'group_content_type_af9d804582e19',
