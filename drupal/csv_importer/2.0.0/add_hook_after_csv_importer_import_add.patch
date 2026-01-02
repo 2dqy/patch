@@ -1,0 +1,12 @@
+diff --git a/src/Plugin/ImporterBase.php b/src/Plugin/ImporterBase.php
+index d740c50..5e16b1a 100644
+--- a/src/Plugin/ImporterBase.php
++++ b/src/Plugin/ImporterBase.php
+@@ -263,6 +263,7 @@ public function add($contents, array &$context) {
+           }
+         }
+       }
++      \Drupal::moduleHandler()->invokeAll('my_custom_hook_after_csv_importer_import_add', [&$entity, &$contents, &$context]);
+     }
+     catch (\Throwable $exception) {
+       $this->messenger()->addError($this->t('The import process encountered errors.'));
