@@ -1,0 +1,12 @@
+diff --git a/modules/webform_image_select/css/webform_image_select.element.css b/modules/webform_image_select/css/webform_image_select.element.css
+index 55eabfce0..68cacb9c4 100644
+--- a/modules/webform_image_select/css/webform_image_select.element.css
++++ b/modules/webform_image_select/css/webform_image_select.element.css
+@@ -10,6 +10,7 @@ html.js .js-form-type-webform-image-select {
+ }
+ 
+ html.js .js-webform-image-select {
++  display: none;
+   position: absolute;
+   opacity: 0;
+   top: -1000px;
