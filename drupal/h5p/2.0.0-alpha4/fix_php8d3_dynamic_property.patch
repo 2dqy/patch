@@ -1,0 +1,41 @@
+diff --git a/vendor/h5p/h5p-core/h5p.classes.php b/vendor/h5p/h5p-core/h5p.classes.php
+index eff8ca62..5de8c02a 100644
+--- a/vendor/h5p/h5p-core/h5p.classes.php
++++ b/vendor/h5p/h5p-core/h5p.classes.php
+@@ -1996,6 +1996,16 @@ abstract class H5PHubEndpoints {
+  */
+ class H5PCore {
+ 
++  public $url;
++
++  public $development_mode;
++
++  public $aggregateAssets;
++
++  public $fullPluginPath;
++
++  public $relativePathRegExp;
++
+   public static $coreApi = array(
+     'majorVersion' => 1,
+     'minorVersion' => 24
+@@ -3508,6 +3518,7 @@ class H5PContentValidator {
+   public $h5pC;
+   private $typeMap, $libraries, $dependencies, $nextWeight;
+   private static $allowed_styleable_tags = array('span', 'p', 'div','h1','h2','h3', 'td');
++  public $allowedStyles;
+ 
+   /**
+    * Constructor for the H5PContentValidator
+diff --git a/vendor/h5p/h5p-editor/h5peditor.class.php b/vendor/h5p/h5p-editor/h5peditor.class.php
+index c1a3fb5a..c44080a9 100644
+--- a/vendor/h5p/h5p-editor/h5peditor.class.php
++++ b/vendor/h5p/h5p-editor/h5peditor.class.php
+@@ -53,6 +53,7 @@ class H5peditor {
+   private $h5p, $storage;
+   public $ajax, $ajaxInterface;
+ 
++  public $content;
+   /**
+    * Constructor for the core editor library.
+    *
