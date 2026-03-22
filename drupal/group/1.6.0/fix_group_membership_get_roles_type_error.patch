@@ -1,0 +1,23 @@
+diff --git a/src/GroupMembership.php b/src/GroupMembership.php
+index cbb6493..a02a2de 100644
+--- a/src/GroupMembership.php
++++ b/src/GroupMembership.php
+@@ -7,7 +7,7 @@
+ 
+ /**
+  * Wrapper class for a GroupContent entity representing a membership.
+- * 
++ *
+  * Should be loaded through the 'group.membership_loader' service.
+  */
+ class GroupMembership implements CacheableDependencyInterface {
+@@ -75,6 +75,9 @@ public function getUser() {
+   public function getRoles() {
+     /** @var \Drupal\group\Entity\Storage\GroupRoleStorageInterface $group_role_storage */
+     $group_role_storage = \Drupal::entityTypeManager()->getStorage('group_role');
++    if ($this->getUser() === null || $this->getGroup() === null) {
++      return [];
++    }
+     return $group_role_storage->loadByUserAndGroup($this->getUser(), $this->getGroup());
+   }
+ 
