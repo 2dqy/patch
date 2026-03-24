@@ -1,0 +1,14 @@
+diff --git a/opigno_module.module b/opigno_module.module
+index 3219ece..5723b3a 100644
+--- a/opigno_module.module
++++ b/opigno_module.module
+@@ -930,6 +930,9 @@ function opigno_module_views_query_alter(ViewExecutable $view, QueryPluginBase $
+ 
+     foreach ($memberships as $membership) {
+       $group = $membership->getGroup();
++      if (!$group) {
++        continue;
++      }
+       $members = $group->getMembers();
+ 
+       foreach ($members as $member) {

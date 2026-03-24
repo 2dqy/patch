@@ -1,3 +1,17 @@
+diff --git a/src/Access/DefaultGroupPermissionCalculator.php b/src/Access/DefaultGroupPermissionCalculator.php
+index 136b715..03a0991 100644
+--- a/src/Access/DefaultGroupPermissionCalculator.php
++++ b/src/Access/DefaultGroupPermissionCalculator.php
+@@ -116,6 +116,9 @@ public function calculateMemberPermissions(AccountInterface $account) {
+     $calculated_permissions->addCacheTags(['group_content_list:plugin:group_membership:entity:' . $account->id()]);
+ 
+     foreach ($this->membershipLoader->loadByUser($account) as $group_membership) {
++      if (!$group_membership->getRoles() || !$group_membership->getGroup()) {
++        continue;
++      }
+       // If the member's roles change, so do the permissions.
+       $calculated_permissions->addCacheableDependency($group_membership);
+ 
 diff --git a/src/GroupMembership.php b/src/GroupMembership.php
 index cbb6493..a02a2de 100644
 --- a/src/GroupMembership.php
