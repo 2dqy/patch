@@ -1,0 +1,13 @@
+diff --git a/modules/opigno_user_selection/src/Controller/OpignoUserSelectionController.php b/modules/opigno_user_selection/src/Controller/OpignoUserSelectionController.php
+index d62b0aa..120614f 100644
+--- a/modules/opigno_user_selection/src/Controller/OpignoUserSelectionController.php
++++ b/modules/opigno_user_selection/src/Controller/OpignoUserSelectionController.php
+@@ -175,7 +175,7 @@ class OpignoUserSelectionController extends ControllerBase {
+         'avatar' => $this->getUserAvatar($user, $meta),
+         'member' => array_filter(array_map(function (GroupMembership $membership) use (&$groups_id, $map) {
+           $group = $membership->getGroup();
+-          if (array_key_exists($group->bundle(), $map)) {
++          if ($group && array_key_exists($group->bundle(), $map)) {
+             $groups_id[] = ($gid = (int) $group->id());
+             return $gid;
+           }
