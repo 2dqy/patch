@@ -1,0 +1,23 @@
+diff --git a/opigno_catalog.module b/opigno_catalog.module
+index 1b29e20..0022f79 100644
+--- a/opigno_catalog.module
++++ b/opigno_catalog.module
+@@ -39,8 +39,7 @@ function opigno_catalog_views_query_alter(ViewExecutable $view, QueryPluginBase
+ 
+   // If the user is admin, bypass the additional checks.
+   $user = \Drupal::currentUser();
+-  if ($user->hasPermission('manage group members in any group')
+-    || $user->hasPermission('manage group content in any group')) {
++  if ($user->hasPermission('access custom catalog all training')) {
+     // Allow platform-level managers to access any training.
+     return;
+   }
+diff --git a/opigno_catalog.permissions.yml b/opigno_catalog.permissions.yml
+new file mode 100644
+index 0000000..27e80f4
+--- /dev/null
++++ b/opigno_catalog.permissions.yml
+@@ -0,0 +1,3 @@
++access custom catalog all training:
++  title: 'Access catalog all training'
++  description: 'Allows the user to access catalog all training'
