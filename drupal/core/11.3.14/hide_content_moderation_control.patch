@@ -1,0 +1,12 @@
+diff --git a/modules/content_moderation/src/EntityOperations.php b/modules/content_moderation/src/EntityOperations.php
+index 52d2ca3909..2bd2a89312 100644
+--- a/modules/content_moderation/src/EntityOperations.php
++++ b/modules/content_moderation/src/EntityOperations.php
+@@ -272,6 +272,7 @@ public function entityTranslationDelete(EntityInterface $translation) {
+    * @see EntityFieldManagerInterface::getExtraFields()
+    */
+   public function entityView(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
++    return;
+     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
+     if (!$this->moderationInfo->isModeratedEntity($entity)) {
+       return;
