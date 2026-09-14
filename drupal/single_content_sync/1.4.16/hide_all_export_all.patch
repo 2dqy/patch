@@ -1,0 +1,12 @@
+diff --git a/src/Plugin/Derivative/ContentBulkExportLocalActions.php b/src/Plugin/Derivative/ContentBulkExportLocalActions.php
+index a1f8e2d..d9af08f 100644
+--- a/src/Plugin/Derivative/ContentBulkExportLocalActions.php
++++ b/src/Plugin/Derivative/ContentBulkExportLocalActions.php
+@@ -56,6 +56,7 @@ class ContentBulkExportLocalActions extends DeriverBase implements ContainerDeri
+    * {@inheritdoc}
+    */
+   public function getDerivativeDefinitions($base_plugin_definition) {
++    return parent::getDerivativeDefinitions($base_plugin_definition); //hide all
+     $this->derivatives = [];
+     $routes = [];
+ 
