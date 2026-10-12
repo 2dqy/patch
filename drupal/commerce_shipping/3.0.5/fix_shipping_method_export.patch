@@ -1,0 +1,12 @@
+diff --git a/src/Entity/ShippingMethod.php b/src/Entity/ShippingMethod.php
+index adf2f6e..cce830b 100644
+--- a/src/Entity/ShippingMethod.php
++++ b/src/Entity/ShippingMethod.php
+@@ -64,6 +64,7 @@ use Drupal\commerce_shipping\Plugin\Commerce\ShippingMethod\ShippingMethodInterf
+  *   links = {
+  *     "add-form" = "/admin/commerce/shipping-methods/add",
+  *     "edit-form" = "/admin/commerce/shipping-methods/manage/{commerce_shipping_method}",
++ *     "single-content:export" = "/admin/commerce/shipping-methods/manage/{commerce_shipping_method}/export",
+  *     "delete-form" = "/admin/commerce/shipping-methods/manage/{commerce_shipping_method}/delete",
+  *     "duplicate-form" = "/admin/commerce/shipping-methods/manage/{commerce_shipping_method}/duplicate",
+  *     "collection" =  "/admin/commerce/shipping-methods",
