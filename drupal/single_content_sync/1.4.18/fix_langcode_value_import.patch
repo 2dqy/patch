@@ -1,0 +1,14 @@
+diff --git a/src/ContentImporter.php b/src/ContentImporter.php
+index dfd17bc..b474806 100644
+--- a/src/ContentImporter.php
++++ b/src/ContentImporter.php
+@@ -351,6 +351,9 @@ protected function rewriteContentLanguage(array $content, string $langcode): arr
+    * Use an available primary language while keeping references importable.
+    */
+   protected function prepareContentLanguage(array $content, ?EntityInterface $entity = NULL): array {
++    if (is_array($content['base_fields']['langcode'] ?? null) && isset($content['base_fields']['langcode'][0]['value'])) {
++      $content['base_fields']['langcode'] = $content['base_fields']['langcode'][0]['value'];
++    }
+     $langcode = $content['base_fields']['langcode'] ?? NULL;
+     if (!$langcode || $this->languageManager->getLanguage($langcode)) {
+       return $content;
