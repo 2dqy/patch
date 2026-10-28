@@ -1,0 +1,26 @@
+diff --git a/modules/user/css/user.admin.css b/modules/user/css/user.admin.css
+index 091da0e4a0..c2d6969b04 100644
+--- a/modules/user/css/user.admin.css
++++ b/modules/user/css/user.admin.css
+@@ -4,6 +4,21 @@
+  */
+ 
+ /* Permissions page */
++/* fix table width */
++.page-user-admin-permissions .permissions {
++  width: 100%;
++  table-layout: fixed;
++
++  th:first-child {
++    width: 25%;
++  }
++
++  th, td {
++    padding-left: 0.1rem;
++    padding-right: 0.1rem;
++    overflow-wrap: anywhere;
++  }
++}
+ .permissions .module {
+   font-weight: bold;
+ }
